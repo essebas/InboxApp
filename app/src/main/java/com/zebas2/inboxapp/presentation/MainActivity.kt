@@ -12,6 +12,7 @@ import com.zebas2.inboxapp.R
 import com.zebas2.inboxapp.data.model.Post
 import com.zebas2.inboxapp.databinding.ActivityMainBinding
 import com.zebas2.inboxapp.domain.usecase.GetMessagesUseCase
+import com.zebas2.inboxapp.presentation.adapter.MessageAdapter
 import com.zebas2.inboxapp.presentation.viewmodel.MessagesViewModel
 import com.zebas2.inboxapp.presentation.viewmodel.MessagesViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +30,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: MessagesViewModelFactory
+
+    @Inject
+    lateinit var messageAdapter: MessageAdapter
 
     lateinit var viewModel: MessagesViewModel
 

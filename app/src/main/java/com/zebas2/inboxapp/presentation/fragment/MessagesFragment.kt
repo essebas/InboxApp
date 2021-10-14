@@ -6,9 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.zebas2.inboxapp.R
 import com.zebas2.inboxapp.databinding.FragmentMessagesBinding
 import com.zebas2.inboxapp.presentation.MainActivity
+import com.zebas2.inboxapp.presentation.adapter.MessageAdapter
 import com.zebas2.inboxapp.presentation.viewmodel.MessagesViewModel
 
 private const val TAG = "MessagesFragment"
@@ -17,6 +20,7 @@ class MessagesFragment : Fragment() {
 
     private lateinit var viewModel: MessagesViewModel
     private lateinit var binding: FragmentMessagesBinding
+    private lateinit var messageAdapter: MessageAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +34,8 @@ class MessagesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMessagesBinding.bind(view)
         viewModel = (activity as MainActivity).viewModel
-
+        messageAdapter = (activity as MainActivity).messageAdapter
+        initRecyclerView()
         viewMessagesList()
     }
 
@@ -38,9 +43,16 @@ class MessagesFragment : Fragment() {
         viewModel.getMessages()
         viewModel.messages.observe(viewLifecycleOwner, { response ->
             Log.d(TAG, "viewMessagesList: ${response.toString()}")
-            when (response) {
-            }
+            messageAdapter.submitList(response)
         })
+    }
+
+    private fun initRecyclerView() {
+        binding.recyclerMessagesList.apply {
+            adapter = messageAdapter
+            layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
+        }
     }
 
 }

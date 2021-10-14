@@ -12,9 +12,12 @@ import com.zebas2.inboxapp.R
 import com.zebas2.inboxapp.data.model.Post
 import com.zebas2.inboxapp.databinding.ActivityMainBinding
 import com.zebas2.inboxapp.domain.usecase.GetMessagesUseCase
+import com.zebas2.inboxapp.domain.usecase.GetUserDetailUseCase
 import com.zebas2.inboxapp.presentation.adapter.MessageAdapter
 import com.zebas2.inboxapp.presentation.viewmodel.MessagesViewModel
 import com.zebas2.inboxapp.presentation.viewmodel.MessagesViewModelFactory
+import com.zebas2.inboxapp.presentation.viewmodel.UserViewModel
+import com.zebas2.inboxapp.presentation.viewmodel.UserViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -28,13 +31,20 @@ class MainActivity : AppCompatActivity() {
     /*@Inject
     lateinit var getMessagesUseCase: GetMessagesUseCase*/
 
+    /*@Inject
+    lateinit var getUserDetailUseCase: GetUserDetailUseCase*/
+
     @Inject
-    lateinit var viewModelFactory: MessagesViewModelFactory
+    lateinit var messageViewModelFactory: MessagesViewModelFactory
+
+    @Inject
+    lateinit var userViewModelFactory: UserViewModelFactory
 
     @Inject
     lateinit var messageAdapter: MessageAdapter
 
-    lateinit var viewModel: MessagesViewModel
+    lateinit var messageViewModel: MessagesViewModel
+    lateinit var userViewModel: UserViewModel
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -45,10 +55,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUpNavigation()
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MessagesViewModel::class.java)
+        messageViewModel =
+            ViewModelProvider(this, messageViewModelFactory).get(MessagesViewModel::class.java)
+        userViewModel =
+            ViewModelProvider(this, userViewModelFactory).get(UserViewModel::class.java)
+
         /*GlobalScope.launch {
-            val list = getMessagesUseCase.execute()
-            Log.d(TAG, "onCreate: ${list.toString()}")
+            val user = getUserDetailUseCase.execute(1)
+            Log.d(TAG, "onCreate: ${user.toString()}")
         }*/
     }
 

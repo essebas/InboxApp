@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/messageDetailFragment"
-        android:name="com.zebas2.inboxapp.MessageDetailFragment"
+        android:name="com.zebas2.inboxapp.presentation.fragment.MessageDetailFragment"
         android:label="fragment_message_detail"
         tools:layout="@layout/fragment_message_detail" />
 

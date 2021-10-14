@@ -2,6 +2,7 @@ package com.zebas2.inboxapp.di
 
 import com.zebas2.inboxapp.BuildConfig
 import com.zebas2.inboxapp.data.api.PostService
+import com.zebas2.inboxapp.data.api.UserService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +28,12 @@ class NetModule {
     @Provides
     fun providePostService(retrofit: Retrofit): PostService {
         return retrofit.create(PostService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserService(retrofit: Retrofit): UserService {
+        return retrofit.create(UserService::class.java)
     }
 
 }

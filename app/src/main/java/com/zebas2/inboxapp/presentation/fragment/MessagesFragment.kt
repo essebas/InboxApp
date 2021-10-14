@@ -1,4 +1,4 @@
-package com.zebas2.inboxapp
+package com.zebas2.inboxapp.presentation.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.zebas2.inboxapp.R
 import com.zebas2.inboxapp.databinding.FragmentMessagesBinding
 import com.zebas2.inboxapp.presentation.MainActivity
 import com.zebas2.inboxapp.presentation.viewmodel.MessagesViewModel

@@ -18,6 +18,10 @@
         android:id="@+id/messageDetailFragment"
         android:name="com.zebas2.inboxapp.presentation.fragment.MessageDetailFragment"
         android:label="fragment_message_detail"
-        tools:layout="@layout/fragment_message_detail" />
+        tools:layout="@layout/fragment_message_detail" >
+        <argument
+            android:name="selected_message"
+            app:argType="com.zebas2.inboxapp.data.model.Post" />
+    </fragment>
 
 </navigation>

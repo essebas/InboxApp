@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zebas2.inboxapp.R
@@ -33,10 +34,11 @@ class MessagesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMessagesBinding.bind(view)
-        viewModel = (activity as MainActivity).viewModel
+        viewModel = (activity as MainActivity).messageViewModel
         messageAdapter = (activity as MainActivity).messageAdapter
         initRecyclerView()
         viewMessagesList()
+        setItemClickListener()
     }
 
     fun viewMessagesList() {
@@ -52,6 +54,19 @@ class MessagesFragment : Fragment() {
             adapter = messageAdapter
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
+        }
+    }
+
+    private fun setItemClickListener() {
+        messageAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("selected_message", it)
+            }
+            var actionNav = R.id.action_messagesFragment_to_messageDetailFragment
+            findNavController().navigate(
+                actionNav,
+                bundle
+            )
         }
     }
 

@@ -1,6 +1,7 @@
 package com.zebas2.inboxapp.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Post(
     @SerializedName("userId")
@@ -12,4 +13,4 @@ data class Post(
     @SerializedName("body")
     val body: String,
     var isRead: Boolean = false
-)
+) : Serializable

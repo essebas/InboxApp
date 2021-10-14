@@ -45,16 +45,24 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() 
         return differ.currentList.size
     }
 
+    private var onItemClickListener: ((Post) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Post) -> Unit) {
+        onItemClickListener = listener
+    }
+
     inner class MessageViewHolder(private val binding: MessageItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(post: Post) {
             binding.txvMessageTitle.text = post.title
             binding.txvMessageDescription.text = post.body
-            binding.imgMessageRead.visibility = if(post.isRead) View.INVISIBLE else View.VISIBLE
+            binding.imgMessageRead.visibility = if (post.isRead) View.INVISIBLE else View.VISIBLE
 
             binding.root.setOnClickListener {
-
+                onItemClickListener?.let {
+                    it(post)
+                }
             }
         }
 

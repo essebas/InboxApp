@@ -25,6 +25,7 @@ android {
             minifyEnabled true
             shrinkResources true
             debuggable false
+            buildConfigField "String", "API_BASE_URL", "\"https://jsonplaceholder.typicode.com/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -33,6 +34,7 @@ android {
             minifyEnabled false
             shrinkResources false
             debuggable true
+            buildConfigField "String", "API_BASE_URL", "\"https://jsonplaceholder.typicode.com/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -52,6 +54,7 @@ android {
 dependencies {
     def retrofit_version = "2.9.0"
     def hilt_version = "2.38.1"
+    def coroutines_version = "1.5.2"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'
@@ -71,4 +74,8 @@ dependencies {
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 }

@@ -28,6 +28,15 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() 
         notifyDataSetChanged()
     }
 
+    fun deleteItem(post: Post) {
+        differ.currentList.remove(post)
+        notifyDataSetChanged()
+    }
+
+    fun getItemAtPosition(position: Int): Post {
+        return differ.currentList[position]
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val binding = MessageItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MessageViewHolder(binding)
@@ -35,9 +44,6 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() 
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val message = differ.currentList[position]
-        if (position > 19) {
-            message.isRead = true
-        }
         holder.bind(message)
     }
 
@@ -51,6 +57,12 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() 
         onItemClickListener = listener
     }
 
+    private var onItemSwipeRightListener: ((Post) -> Unit)? = null
+
+    fun setOnItemSwipeRightListener(listener: (Post) -> Unit) {
+        onItemSwipeRightListener = listener
+    }
+
     inner class MessageViewHolder(private val binding: MessageItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -58,9 +70,11 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() 
             binding.txvMessageTitle.text = post.title
             binding.txvMessageDescription.text = post.body
             binding.imgMessageRead.visibility = if (post.isRead) View.INVISIBLE else View.VISIBLE
+            binding.imgMessageFav.visibility = if (post.isFavorite) View.VISIBLE else View.INVISIBLE
 
             binding.root.setOnClickListener {
                 onItemClickListener?.let {
+                    post.isRead = true
                     it(post)
                 }
             }

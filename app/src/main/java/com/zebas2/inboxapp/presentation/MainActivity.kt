@@ -2,17 +2,18 @@ package com.zebas2.inboxapp.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+
 import com.zebas2.inboxapp.R
 import com.zebas2.inboxapp.data.model.Post
 import com.zebas2.inboxapp.databinding.ActivityMainBinding
-import com.zebas2.inboxapp.domain.usecase.GetMessagesUseCase
-import com.zebas2.inboxapp.domain.usecase.GetUserDetailUseCase
+
 import com.zebas2.inboxapp.presentation.adapter.MessageAdapter
 import com.zebas2.inboxapp.presentation.viewmodel.MessagesViewModel
 import com.zebas2.inboxapp.presentation.viewmodel.MessagesViewModelFactory
@@ -70,9 +71,19 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        /*val appBarConfiguration = AppBarConfiguration.Builder(navController.graph).build()
+        val appBarConfiguration = AppBarConfiguration.Builder(navController.graph).build()
         supportActionBar?.apply {
             setupActionBarWithNavController(navController, appBarConfiguration)
-        }*/
+        }
+    }
+
+    fun setToolbar(toolbar: Toolbar) {
+        if (toolbar != null) {
+            setSupportActionBar(toolbar)
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

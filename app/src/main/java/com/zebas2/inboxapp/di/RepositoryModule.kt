@@ -2,6 +2,7 @@ package com.zebas2.inboxapp.di
 
 import com.zebas2.inboxapp.data.repository.PostRepositoryImp
 import com.zebas2.inboxapp.data.repository.UserRepositoryImp
+import com.zebas2.inboxapp.data.repository.datasource.PostLocalDataSource
 import com.zebas2.inboxapp.data.repository.datasource.PostRemoteDataSource
 import com.zebas2.inboxapp.data.repository.datasource.UserRemoteDataSource
 import com.zebas2.inboxapp.domain.repository.PostRepository
@@ -19,9 +20,10 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun providePostRepository(
-        remoteDataSource: PostRemoteDataSource
+        remoteDataSource: PostRemoteDataSource,
+        localDataSource: PostLocalDataSource
     ): PostRepository {
-        return PostRepositoryImp(remoteDataSource)
+        return PostRepositoryImp(remoteDataSource, localDataSource)
     }
 
     @Singleton

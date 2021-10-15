@@ -1,8 +1,7 @@
 package com.zebas2.inboxapp.di
 
 import android.app.Application
-import com.zebas2.inboxapp.domain.usecase.GetMessagesUseCase
-import com.zebas2.inboxapp.domain.usecase.GetUserDetailUseCase
+import com.zebas2.inboxapp.domain.usecase.*
 import com.zebas2.inboxapp.presentation.viewmodel.MessagesViewModelFactory
 import com.zebas2.inboxapp.presentation.viewmodel.UserViewModelFactory
 import dagger.Module
@@ -19,9 +18,22 @@ class FactoryModule {
     @Provides
     fun provideMessagesViewModelFactory(
         application: Application,
-        getMessagesUseCase: GetMessagesUseCase
+        getMessagesUseCase: GetMessagesUseCase,
+        saveMessageUseCase: SaveMessageUseCase,
+        getFavoriteMessagesUseCase: GetFavoriteMessagesUseCase,
+        deleteSavedMessageUseCase: DeleteSavedMessageUseCase,
+        updateMessageUseCase: UpdateMessageUseCase,
+        reloadFromServerUseCase: ReloadFromServerUseCase
     ): MessagesViewModelFactory {
-        return MessagesViewModelFactory(application, getMessagesUseCase)
+        return MessagesViewModelFactory(
+            application,
+            getMessagesUseCase,
+            saveMessageUseCase,
+            getFavoriteMessagesUseCase,
+            deleteSavedMessageUseCase,
+            updateMessageUseCase,
+            reloadFromServerUseCase
+        )
     }
 
     @Singleton

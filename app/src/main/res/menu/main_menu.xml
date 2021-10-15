@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_action_reload_all"
+        android:icon="@drawable/ic_efresh"
+        android:title="refrescar"
+        app:showAsAction="ifRoom"></item>
+
+    <item
+        android:id="@+id/menu_action_filter_all"
+        android:title="Ver todos"
+        app:showAsAction="never"></item>
+
+    <item
+        android:id="@+id/menu_action_filter_fav"
+        android:title="Ver favoritos"
+        app:showAsAction="never"></item>
+
+    <item
+        android:id="@+id/menu_action_delete_all"
+        android:title="Eliminar todo"
+        app:showAsAction="never"></item>
+
+</menu>

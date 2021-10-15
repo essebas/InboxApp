@@ -8,17 +8,24 @@ import android.os.Build
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.zebas2.inboxapp.data.model.Post
-import com.zebas2.inboxapp.domain.usecase.GetMessagesUseCase
+import com.zebas2.inboxapp.domain.usecase.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 private const val TAG = "MessagesViewModel"
 
 class MessagesViewModel(
     private val app: Application,
-    private val getPostUseCase: GetMessagesUseCase
+    private val getPostUseCase: GetMessagesUseCase,
+    private val saveMessageUseCase: SaveMessageUseCase,
+    private val getFavoriteMessagesUseCase: GetFavoriteMessagesUseCase,
+    private val deleteSavedMessageUseCase: DeleteSavedMessageUseCase,
+    private val updateMessageUseCase: UpdateMessageUseCase,
+    private val reloadFromServerUseCase: ReloadFromServerUseCase
 ) : AndroidViewModel(app) {
 
     val messages: MutableLiveData<List<Post>> = MutableLiveData()
@@ -32,6 +39,40 @@ class MessagesViewModel(
         } catch (e: Exception) {
             Log.i(TAG, "getMessages: ${e.message.toString()}")
         }
+    }
+
+    fun reloadFromServer() = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            if (isNetWorkAvailable(app)) {
+                val apiResult = reloadFromServerUseCase.execute()
+                messages.postValue(apiResult)
+            }
+        } catch (e: Exception) {
+            Log.i(TAG, "getMessages: ${e.message.toString()}")
+        }
+    }
+
+    fun savePost(post: Post) = viewModelScope.launch {
+        saveMessageUseCase.execute(post)
+    }
+
+    fun getFavoritesMessages() = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            if (isNetWorkAvailable(app)) {
+                val apiResult = getFavoriteMessagesUseCase.execute()
+                messages.postValue(apiResult)
+            }
+        } catch (e: Exception) {
+            Log.i(TAG, "getMessages: ${e.message.toString()}")
+        }
+    }
+
+    fun deletePost(post: Post) = viewModelScope.launch {
+        deleteSavedMessageUseCase.execute(post)
+    }
+
+    fun updatePost(post: Post) = viewModelScope.launch {
+        updateMessageUseCase.execute(post)
     }
 
     fun isNetWorkAvailable(context: Context?): Boolean {

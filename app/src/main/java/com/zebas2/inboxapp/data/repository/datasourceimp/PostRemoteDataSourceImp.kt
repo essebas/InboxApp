@@ -13,4 +13,8 @@ class PostRemoteDataSourceImp(
         return postService.getPosts()
     }
 
+    override suspend fun deletePostById(id: Int) {
+        postService.deletePostById(id)
+    }
+
 }

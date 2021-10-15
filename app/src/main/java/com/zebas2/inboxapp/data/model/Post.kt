@@ -22,5 +22,7 @@ data class Post(
     @SerializedName("body")
     val body: String,
     @SerializedName("isRead")
-    var isRead: Boolean = false
+    var isRead: Boolean = false,
+    @SerializedName("isFavorite")
+    var isFavorite: Boolean = false
 ) : Serializable

@@ -7,4 +7,6 @@ interface PostRemoteDataSource {
 
     suspend fun getPosts(): Response<List<Post>>
 
+    suspend fun deletePostById(id: Int)
+
 }

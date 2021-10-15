@@ -6,7 +6,7 @@ In the following application a user can see and consult all post or messages fro
 
 ### Gathering information - UML Client Logic
 
-![Inicio de la aplicacion](https://github.com/essebas/MarvelApp/blob/master/README_IMAGES/MarvelUseCase.png)
+![Inicio de la aplicacion](https://github.com/essebas/MarvelApp/blob/master/README_IMAGES/InboxUseCase.png)
 
 
 ## Technologies used

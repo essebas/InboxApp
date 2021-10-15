@@ -8,6 +8,9 @@ In the following application a user can see and consult all post or messages fro
 
 ![Inicio de la aplicacion](https://github.com/essebas/InboxApp/blob/master/README-IMAGES/InboxUseCase.png)
 
+### Project Architecture
+
+##MVVM Clean Architecture
 
 ## Technologies used
 - Retrofit (v2.9.0)

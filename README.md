@@ -10,7 +10,7 @@ In the following application a user can see and consult all post or messages fro
 
 ### Project Architecture
 
-## MVVM Clean Architecture
+#### MVVM Clean Architecture
 
 ## Technologies used
 - Retrofit (v2.9.0)

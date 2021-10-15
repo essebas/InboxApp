@@ -26,5 +26,3 @@ In the following application a user can see and consult all post or messages fro
 ### Others Libraries
 - Material Design
 - Glide
-- MockWebServer
-- Truth
